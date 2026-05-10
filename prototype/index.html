@@ -5,242 +5,74 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trieste App - Prototipo Gestión de Taller</title>
   <style>
-    :root {
-      --trieste-blue: #000064;
-      --trieste-yellow: #FCDF0D;
-      --trieste-white: #FFFFFE;
-      --bg: #f5f6fb;
-      --panel: #ffffff;
-      --text: #101828;
-      --muted: #667085;
-      --border: #e4e7ec;
-      --shadow: 0 18px 50px rgba(16, 24, 40, .08);
+    :root{
+      --blue:#005BFF;--deep:#000064;--yellow:#FCDF0D;--white:#FFFFFE;--green:#22C55E;--orange:#F59E0B;--purple:#A855F7;--red:#EF4444;
+      --bg:#06111f;--bg2:#081827;--panel:rgba(15,33,52,.78);--panel2:rgba(18,39,61,.9);--line:rgba(148,163,184,.13);--text:#F8FAFC;--muted:#94A3B8;--soft:#CBD5E1;
+      --shadow:0 24px 80px rgba(0,0,0,.34);--glow:0 0 38px rgba(0,91,255,.18)
     }
-    body.dark {
-      --bg: #070a16;
-      --panel: rgba(255,255,255,.055);
-      --text: #fffffe;
-      --muted: #a8b3cf;
-      --border: rgba(255,255,255,.10);
-      --shadow: 0 18px 50px rgba(0,0,0,.35);
-    }
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: Inter, Segoe UI, Arial, sans-serif; background: var(--bg); color: var(--text); }
-    .app { display: grid; grid-template-columns: 290px 1fr; min-height: 100vh; }
-    aside { background: var(--panel); border-right: 1px solid var(--border); padding: 22px; position: sticky; top: 0; height: 100vh; }
-    .brand { background: var(--trieste-blue); color: var(--trieste-white); border-radius: 28px; padding: 18px; box-shadow: var(--shadow); }
-    .brand-row { display: flex; gap: 14px; align-items: center; }
-    .logo-mark { width: 56px; height: 56px; border-radius: 20px; background: var(--trieste-yellow); color: var(--trieste-blue); display: grid; place-items: center; font-weight: 1000; font-size: 26px; }
-    .brand h1 { margin: 0; font-size: 22px; letter-spacing: .6px; }
-    .brand p { margin: 3px 0 0; color: var(--trieste-yellow); font-weight: 700; font-size: 12px; }
-    nav { margin-top: 22px; display: grid; gap: 7px; }
-    .nav-btn { border: 0; background: transparent; color: var(--muted); text-align: left; padding: 13px 14px; border-radius: 18px; font-weight: 800; cursor: pointer; transition: .18s; display:flex; align-items:center; gap:10px; }
-    .nav-btn:hover { background: rgba(0,0,100,.06); color: var(--text); }
-    body.dark .nav-btn:hover { background: rgba(255,255,255,.06); }
-    .nav-btn.active { background: var(--trieste-yellow); color: var(--trieste-blue); box-shadow: 0 10px 25px rgba(252,223,13,.22); }
-    main { padding: 26px; }
-    header { background: var(--panel); border: 1px solid var(--border); border-radius: 28px; padding: 18px 22px; box-shadow: var(--shadow); display:flex; justify-content:space-between; gap:18px; align-items:center; margin-bottom: 24px; }
-    .eyebrow { color: var(--muted); font-weight: 700; font-size: 13px; }
-    header h2 { margin: 4px 0 0; font-size: 28px; }
-    .actions { display:flex; gap:10px; align-items:center; }
-    button.primary { background: var(--trieste-blue); color: white; border: 0; border-radius: 16px; padding: 13px 17px; font-weight: 900; cursor:pointer; }
-    button.yellow { background: var(--trieste-yellow); color: var(--trieste-blue); border: 0; border-radius: 16px; padding: 13px 17px; font-weight: 900; cursor:pointer; }
-    .icon-btn { border:1px solid var(--border); background: var(--panel); color: var(--text); border-radius: 16px; padding: 13px 15px; font-weight:900; cursor:pointer; }
-    .grid4 { display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap:16px; }
-    .card { background: var(--panel); border:1px solid var(--border); border-radius: 26px; padding: 22px; box-shadow: var(--shadow); }
-    .stat-title { color: var(--muted); font-weight:800; font-size:14px; }
-    .stat-value { font-size:34px; font-weight:1000; margin-top:10px; }
-    .stat-note { color: var(--muted); margin-top:5px; font-size:14px; line-height: 1.5; }
-    .content-grid { display:grid; grid-template-columns: 1.2fr .8fr; gap:18px; margin-top:18px; }
-    .searchbox { margin-top:18px; background: rgba(0,0,100,.045); border:1px dashed var(--border); border-radius:22px; padding:16px; display:flex; gap:12px; }
-    body.dark .searchbox { background: rgba(255,255,255,.045); }
-    input, select, textarea { width:100%; border:1px solid var(--border); border-radius:16px; padding:14px 16px; font-size:15px; font-weight:700; background:var(--panel); color:var(--text); outline:none; }
-    input.plate { font-size:20px; font-weight:1000; letter-spacing:3px; text-transform:uppercase; }
-    textarea { min-height: 100px; resize: vertical; }
-    .form-grid { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:14px; margin-top: 18px; }
-    .list { margin-top:14px; display:grid; gap:12px; }
-    .row { border:1px solid var(--border); border-radius:20px; padding:15px; display:flex; justify-content:space-between; gap:12px; align-items:center; cursor:pointer; transition:.18s; }
-    .row:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
-    .row strong { display:block; }
-    .row small { color:var(--muted); }
-    .badge { border-radius:999px; padding:7px 11px; font-weight:900; font-size:12px; white-space:nowrap; }
-    .badge.yellow { background:#fff7c2; color:#5b4700; }
-    .badge.blue { background:#dbeafe; color:#000064; }
-    .badge.green { background:#d1fae5; color:#065f46; }
-    .badge.red { background:#fee2e2; color:#991b1b; }
-    body.dark .badge.yellow { background:rgba(252,223,13,.18); color:#fff1a0; }
-    body.dark .badge.blue { background:rgba(59,130,246,.18); color:#bfdbfe; }
-    body.dark .badge.green { background:rgba(16,185,129,.18); color:#a7f3d0; }
-    body.dark .badge.red { background:rgba(248,113,113,.18); color:#fecaca; }
-    .module-screen { display:none; }
-    .module-screen.active { display:block; animation: fade .22s ease; }
-    @keyframes fade { from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:translateY(0)} }
-    .placeholder-grid { display:grid; grid-template-columns: repeat(3,1fr); gap:16px; }
-    .placeholder { border:1px dashed var(--border); background: rgba(0,0,100,.035); border-radius:24px; padding:24px; min-height:160px; }
-    body.dark .placeholder { background: rgba(255,255,255,.035); }
-    .placeholder h3 { margin:0 0 10px; }
-    .placeholder p { color:var(--muted); line-height:1.5; margin:0; }
-    .tabs { display:flex; gap:8px; flex-wrap:wrap; margin: 18px 0; }
-    .tab { padding: 10px 13px; border:1px solid var(--border); border-radius:999px; color:var(--muted); font-weight:900; background:var(--panel); }
-    .tab.active { background: var(--trieste-yellow); color: var(--trieste-blue); border-color: var(--trieste-yellow); }
-    @media (max-width: 980px) {
-      .app { grid-template-columns: 1fr; }
-      aside { position:relative; height:auto; }
-      nav { grid-template-columns: repeat(2,1fr); }
-      .grid4, .content-grid, .placeholder-grid, .form-grid { grid-template-columns:1fr; }
-      header { flex-direction:column; align-items:flex-start; }
-      .searchbox { flex-direction: column; }
-    }
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top left,rgba(0,91,255,.16),transparent 30%),linear-gradient(180deg,#05101e,#071726 50%,#06111f);color:var(--text)}
+    .app{display:grid;grid-template-columns:278px 1fr;min-height:100vh}.sidebar{border-right:1px solid var(--line);background:rgba(3,12,23,.74);backdrop-filter:blur(18px);padding:18px 14px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column}.brand{display:flex;gap:13px;align-items:center;padding:3px 8px 20px;border-bottom:1px solid var(--line)}.gear{width:54px;height:54px;border-radius:18px;background:linear-gradient(135deg,#0068ff,#003fc0);display:grid;place-items:center;box-shadow:0 0 32px rgba(0,91,255,.45);font-size:27px}.brand h1{font-size:24px;margin:0;font-weight:950;letter-spacing:.3px}.brand p{margin:3px 0 0;color:#a8b3cf;font-size:13px;line-height:1.3}.nav{padding:18px 0;overflow:auto}.group{margin:16px 8px 8px;color:#7e8ba4;font-size:12px;text-transform:uppercase;font-weight:900;letter-spacing:.6px}.nav button{width:100%;border:0;background:transparent;color:#c8d2e3;padding:12px 12px;border-radius:10px;text-align:left;font-size:15px;display:flex;gap:12px;align-items:center;cursor:pointer;transition:.18s}.nav button:hover{background:rgba(255,255,255,.045);color:white}.nav button.active{background:linear-gradient(135deg,#0877ff,#004be4);color:white;box-shadow:0 12px 28px rgba(0,91,255,.32)}.soon{margin-left:auto;font-size:10px;border:1px solid rgba(168,85,247,.45);color:#d8b4fe;background:rgba(168,85,247,.13);border-radius:8px;padding:3px 6px}.ai-card{margin-top:auto;border:1px solid var(--line);border-radius:14px;padding:14px;background:linear-gradient(135deg,rgba(0,91,255,.14),rgba(168,85,247,.08));display:flex;gap:12px;align-items:center}.ai-orb{width:46px;height:46px;border-radius:50%;background:radial-gradient(circle,#38bdf8,#0b5cff 60%,#1e1b4b);display:grid;place-items:center;font-weight:950;box-shadow:0 0 28px rgba(0,91,255,.6)}.ai-card strong{display:block}.ai-card small{color:#a8b3cf}
+    main{padding:0 26px 20px}.topbar{height:84px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:22px}.welcome{display:flex;align-items:center;gap:22px}.menu{font-size:27px;color:white}.welcome h2{margin:0;font-size:21px}.welcome p{margin:7px 0 0;color:#a9b5c8}.global-search{margin-left:auto;max-width:420px;width:34%;position:relative}.global-search input{width:100%;height:44px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.045);color:white;padding:0 72px 0 42px;outline:none}.global-search span{position:absolute;left:14px;top:12px;color:#94a3b8}.kbd{position:absolute;right:9px;top:9px;background:rgba(255,255,255,.07);border-radius:7px;color:#94a3b8;font-size:12px;padding:5px 8px}.user{display:flex;align-items:center;gap:14px}.bell{position:relative;font-size:24px}.dot{position:absolute;right:-7px;top:-8px;background:var(--red);color:white;border-radius:99px;font-size:11px;padding:2px 6px}.avatar{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#e2e8f0,#64748b)}.user strong{display:block}.user small{color:#a8b3cf}.screen{display:none}.screen.active{display:block;animation:fade .22s ease}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:22px}.card{background:linear-gradient(145deg,rgba(21,42,65,.86),rgba(10,24,40,.86));border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);position:relative;overflow:hidden}.card:before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.05),transparent 32%);pointer-events:none}.stat{padding:24px}.stat .label{color:#d5dbea;font-size:16px}.stat .value{font-size:34px;font-weight:950;margin:12px 0}.trend{font-size:13px;color:#22c55e}.stat-icon{position:absolute;right:24px;top:23px;width:62px;height:62px;border-radius:14px;display:grid;place-items:center;font-size:30px}.i-blue{background:rgba(0,91,255,.24);color:#3894ff}.i-green{background:rgba(34,197,94,.2);color:#22c55e}.i-orange{background:rgba(245,158,11,.21);color:#f59e0b}.i-purple{background:rgba(168,85,247,.22);color:#a855f7}.two{display:grid;grid-template-columns:1.05fr 1.95fr;gap:16px;margin-top:16px}.panel{padding:22px}.panel h3{margin:0 0 8px;font-size:19px}.panel p{margin:0;color:#a8b3cf;font-size:14px}.quick-search{display:flex;gap:10px;margin-top:18px}.quick-search input{flex:1;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:8px;color:white;padding:0 14px;height:43px;outline:none}.btn{border:0;border-radius:8px;color:white;font-weight:850;cursor:pointer;height:43px;padding:0 20px;background:linear-gradient(135deg,#0877ff,#004be4)}.quick-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:17px}.quick-actions button{height:54px;border:1px solid var(--line);background:rgba(255,255,255,.035);border-radius:10px;color:white;font-weight:850;cursor:pointer}.quick-actions button.primary{background:linear-gradient(135deg,#0877ff,#004be4)}.quick-actions .green{color:#22c55e}.quick-actions .purple{color:#c084fc}.content{display:grid;grid-template-columns:minmax(0,2.2fr) minmax(330px,.95fr);gap:16px;margin-top:16px}.table{width:100%;border-collapse:collapse;margin-top:16px}.table th{color:#8fa0b7;text-align:left;font-size:13px;font-weight:700;padding:13px 7px;border-bottom:1px solid var(--line)}.table td{padding:14px 7px;border-bottom:1px solid var(--line);font-size:14px}.badge{display:inline-flex;border-radius:7px;padding:6px 9px;font-weight:850;font-size:12px}.b-orange{background:rgba(245,158,11,.22);color:#fbbf24}.b-green{background:rgba(34,197,94,.2);color:#22c55e}.b-blue{background:rgba(0,91,255,.22);color:#60a5fa}.b-gray{background:rgba(148,163,184,.14);color:#cbd5e1}.eye{background:#003f9f;border:0;border-radius:8px;color:#60a5fa;padding:7px 11px}.center-btn{display:flex;justify-content:center;margin-top:22px}.ghost{border:1px solid var(--line);border-radius:9px;background:rgba(255,255,255,.025);color:white;padding:12px 22px}.side-stack{display:grid;gap:14px}.alert-row,.stock-row,.activity-row{display:grid;grid-template-columns:42px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}.circle{width:34px;height:34px;border-radius:50%;display:grid;place-items:center}.c-red{background:rgba(239,68,68,.24)}.c-orange{background:rgba(245,158,11,.22)}.c-yellow{background:rgba(252,223,13,.18)}.c-blue{background:rgba(0,91,255,.24)}.c-green{background:rgba(34,197,94,.2)}.c-purple{background:rgba(168,85,247,.21)}.pill{border-radius:50px;color:white;font-size:12px;font-weight:900;padding:5px 9px}.red{background:var(--red)}.orange{background:#f97316}.yellow{background:#eab308}.blue{background:#0b74ff}.mini-link{color:#308cff;font-size:13px;text-decoration:none}.stock-row{grid-template-columns:34px 1fr auto auto}.stock-low{color:#ff3b30;font-weight:900}.charts{display:grid;grid-template-columns:.85fr 1.2fr 1fr;gap:16px;margin-top:16px}.donut{display:flex;align-items:center;gap:24px;margin-top:22px}.ring{width:135px;height:135px;border-radius:50%;background:conic-gradient(#f59e0b 0 45%,#22c55e 45% 60%,#0068ff 60% 85%,#cbd5e1 85%);position:relative}.ring:after{content:"";position:absolute;inset:31px;border-radius:50%;background:#081827}.legend{display:grid;gap:12px;color:#a8b3cf;font-size:14px}.sq{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:8px}.linechart{height:165px;margin-top:8px;background:linear-gradient(180deg,rgba(0,91,255,.18),transparent);border-radius:12px;position:relative;overflow:hidden}.linechart svg{width:100%;height:100%}.activity-row{grid-template-columns:44px 1fr auto}.footer{display:flex;justify-content:space-between;color:#93a4bb;font-size:13px;padding:18px 6px}.generic,.ingreso,.ordenes{margin-top:22px}.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:16px}.field{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:10px;color:white;padding:14px}.field.big{grid-column:1/-1;min-height:110px}.tabs{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}.tab{border:1px solid var(--line);border-radius:50px;padding:9px 13px;color:#a8b3cf}.tab.active{background:#005bff;color:white;border-color:#005bff}.placeholder-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}.placeholder{border:1px dashed var(--line);border-radius:12px;padding:22px;background:rgba(255,255,255,.035);color:#a8b3cf}.placeholder h3{color:white;margin-top:0}
+    @media(max-width:1200px){.app{grid-template-columns:1fr}.sidebar{height:auto;position:relative}.nav{display:grid;grid-template-columns:repeat(2,1fr)}.ai-card{display:none}.stats,.two,.content,.charts,.form-grid,.placeholder-grid{grid-template-columns:1fr}.global-search{width:100%;max-width:none}.topbar{height:auto;flex-wrap:wrap;padding:14px 0}.quick-actions{grid-template-columns:1fr 1fr}.table{min-width:820px}.table-wrap{overflow:auto}}
   </style>
 </head>
-<body class="dark">
-  <div class="app">
-    <aside>
-      <div class="brand">
-        <div class="brand-row">
-          <div class="logo-mark">T</div>
-          <div>
-            <h1>TRIESTE</h1>
-            <p>Gestión de Taller</p>
-          </div>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><div class="gear">⚙️</div><div><h1>TRIESTE IA</h1><p>Sistema de Gestión<br>Taller Mecánico</p></div></div>
+    <nav class="nav" id="nav"></nav>
+    <div class="ai-card"><div class="ai-orb">AI</div><div><strong>TRIESTE IA</strong><small>Asistente Inteligente<br>Disponible 24/7</small></div></div>
+  </aside>
+  <main>
+    <header class="topbar">
+      <div class="welcome"><div class="menu">☰</div><div><h2 id="pageTitle">Bienvenido al Sistema 👋</h2><p>Panel de control principal del taller</p></div></div>
+      <div class="global-search"><span>⌕</span><input placeholder="Buscar matrículas, clientes, órdenes..."><div class="kbd">Ctrl + K</div></div>
+      <div class="user"><div class="bell">♧<b class="dot">3</b></div><div class="avatar"></div><div><strong>Administrador</strong><small>admin@trieste.com</small></div><div>⌄</div></div>
+    </header>
+
+    <section id="dashboard" class="screen active">
+      <div class="stats">
+        <div class="card stat"><div class="label">Órdenes Hoy</div><div class="value">8</div><div class="trend">↟ 12% vs ayer</div><div class="stat-icon i-blue">🚚</div></div>
+        <div class="card stat"><div class="label">En Proceso</div><div class="value">15</div><div class="trend" style="color:#a8b3cf">Vehículos activos</div><div class="stat-icon i-green">🔧</div></div>
+        <div class="card stat"><div class="label">Por Entregar</div><div class="value">5</div><div class="trend" style="color:#a8b3cf">Listos para entrega</div><div class="stat-icon i-orange">🗓</div></div>
+        <div class="card stat"><div class="label">Ingresos Hoy</div><div class="value">$2,450,000</div><div class="trend">↟ 18% vs ayer</div><div class="stat-icon i-purple">$</div></div>
+      </div>
+      <div class="two">
+        <div class="card panel"><h3>Búsqueda Rápida de Vehículo</h3><p>Busca por matrícula para ver información y crear órdenes</p><div class="quick-search"><input placeholder="Ingrese matrícula del vehículo..."><button class="btn" onclick="go('ingreso')">⌕</button></div></div>
+        <div class="card panel"><h3>Acciones Rápidas</h3><div class="quick-actions"><button class="primary" onclick="go('ingreso')">＋ Nuevo Ingreso</button><button onclick="go('ordenes')">▤ Nueva Orden</button><button class="green" onclick="go('presupuestos')">▣ Nuevo Presupuesto</button><button class="purple">▤ Nueva Factura</button></div></div>
+      </div>
+      <div class="content">
+        <div class="card panel"><h3>Órdenes Recientes</h3><div class="table-wrap"><table class="table"><thead><tr><th># Orden</th><th>Vehículo</th><th>Cliente</th><th>Fecha</th><th>Estado</th><th>Total</th><th>Acciones</th></tr></thead><tbody>
+          <tr><td>OT-2025-0087</td><td>ABC-123</td><td>Toyota Corolla 2020</td><td>12/09/2025</td><td><span class="badge b-orange">En Proceso</span></td><td>$450,000</td><td><button class="eye">⊙</button></td></tr>
+          <tr><td>OT-2025-0086</td><td>DEF-456</td><td>Mazda 3 2019</td><td>12/09/2025</td><td><span class="badge b-green">Por Entregar</span></td><td>$320,000</td><td><button class="eye">⊙</button></td></tr>
+          <tr><td>OT-2025-0085</td><td>GHI-789</td><td>Chevrolet Spark 2021</td><td>11/09/2025</td><td><span class="badge b-orange">En Proceso</span></td><td>$280,000</td><td><button class="eye">⊙</button></td></tr>
+          <tr><td>OT-2025-0084</td><td>JKL-012</td><td>Kia Picanto 2020</td><td>11/09/2025</td><td><span class="badge b-blue">Pendiente</span></td><td>$150,000</td><td><button class="eye">⊙</button></td></tr>
+          <tr><td>OT-2025-0083</td><td>MNO-345</td><td>Renault Logan 2018</td><td>10/09/2025</td><td><span class="badge b-gray">Completado</span></td><td>$380,000</td><td><button class="eye">⊙</button></td></tr>
+        </tbody></table></div><div class="center-btn"><button class="ghost" onclick="go('ordenes')">Ver todas las órdenes</button></div></div>
+        <div class="side-stack">
+          <div class="card panel"><h3>Alertas y Notificaciones <a class="mini-link" style="float:right">Ver todas</a></h3><div class="alert-row"><div class="circle c-red">⚠</div><div><strong>3 órdenes detenidas</strong><br><small>Esperando aprobación del cliente</small></div><span class="pill red">3</span></div><div class="alert-row"><div class="circle c-orange">📦</div><div><strong>5 repuestos por llegar</strong><br><small>Órdenes pendientes</small></div><span class="pill orange">7</span></div><div class="alert-row"><div class="circle c-yellow">⚠</div><div><strong>2 garantías por vencer</strong><br><small>En los próximos 7 días</small></div><span class="pill yellow">2</span></div><div class="alert-row"><div class="circle c-blue">▣</div><div><strong>Reporte diario disponible</strong><br><small>Resumen del día listo</small></div><span class="pill blue">1</span></div></div>
+          <div class="card panel"><h3>Repuestos Críticos <a class="mini-link" style="float:right">Ver todas</a></h3><div class="stock-row"><span>🧰</span><span>Filtro de Aceite</span><span class="stock-low">Stock: 2</span><span>Min: 10</span></div><div class="stock-row"><span>📦</span><span>Pastillas de Freno</span><span class="stock-low">Stock: 1</span><span>Min: 8</span></div><div class="stock-row"><span>🛢</span><span>Aceite 5W-30</span><span class="stock-low">Stock: 3</span><span>Min: 15</span></div><div class="stock-row"><span>📦</span><span>Filtro de Aire</span><span class="stock-low">Stock: 2</span><span>Min: 10</span></div></div>
         </div>
       </div>
-      <nav id="nav"></nav>
-    </aside>
-    <main>
-      <header>
-        <div>
-          <div class="eyebrow">Sistema local · Prototipo navegable</div>
-          <h2 id="pageTitle">Dashboard</h2>
-        </div>
-        <div class="actions">
-          <button class="icon-btn">🔔 Alertas</button>
-          <button class="yellow" onclick="toggleTheme()" id="themeBtn">☀️ Modo claro</button>
-        </div>
-      </header>
+      <div class="charts">
+        <div class="card panel"><h3>Órdenes por Estado</h3><div class="donut"><div class="ring"></div><div class="legend"><span><b class="sq" style="background:#f59e0b"></b>En Proceso &nbsp; 15 (45%)</span><span><b class="sq" style="background:#22c55e"></b>Por Entregar &nbsp; 5 (15%)</span><span><b class="sq" style="background:#0068ff"></b>Pendientes &nbsp; 8 (25%)</span><span><b class="sq" style="background:#22c55e"></b>Completadas &nbsp; 5 (15%)</span></div></div></div>
+        <div class="card panel"><h3>Ingresos por Período <button class="ghost" style="float:right;padding:8px 12px">Este mes⌄</button></h3><div class="value" style="font-size:28px;font-weight:950;margin-top:14px">$24,500,000</div><p>Este mes</p><div class="linechart"><svg viewBox="0 0 500 160" preserveAspectRatio="none"><polyline points="0,110 35,96 70,102 105,130 140,112 175,105 210,74 245,58 280,62 315,61 350,42 385,74 420,70 455,48 500,35" fill="none" stroke="#0b74ff" stroke-width="4"/><g fill="#0b74ff"><circle cx="0" cy="110" r="4"/><circle cx="105" cy="130" r="4"/><circle cx="210" cy="74" r="4"/><circle cx="350" cy="42" r="4"/><circle cx="500" cy="35" r="4"/></g></svg></div></div>
+        <div class="card panel"><h3>Actividad Reciente <a class="mini-link" style="float:right">Ver todas</a></h3><div class="activity-row"><div class="circle c-blue">🚚</div><div><strong>Nueva orden creada</strong><br><small>OT-2025-0087 - ABC-123</small></div><small>Hace 15 min</small></div><div class="activity-row"><div class="circle c-green">✅</div><div><strong>Vehículo completado</strong><br><small>OT-2025-0083 - MNO-345</small></div><small>Hace 1 hora</small></div><div class="activity-row"><div class="circle c-purple">▤</div><div><strong>Presupuesto aprobado</strong><br><small>PR-2025-0045 - DEF-456</small></div><small>Hace 2 horas</small></div><div class="activity-row"><div class="circle c-orange">📦</div><div><strong>Repuesto agregado</strong><br><small>Filtro de Aceite - OT-2025-0086</small></div><small>Hace 3 horas</small></div></div>
+      </div>
+    </section>
 
-      <section id="dashboard" class="module-screen active">
-        <div class="grid4">
-          <div class="card"><div class="stat-title">Órdenes activas</div><div class="stat-value">18</div><div class="stat-note">5 esperando aprobación</div></div>
-          <div class="card"><div class="stat-title">Bloqueadas</div><div class="stat-value">6</div><div class="stat-note">Repuestos o aprobación</div></div>
-          <div class="card"><div class="stat-title">Listas</div><div class="stat-value">4</div><div class="stat-note">Pendientes por entregar</div></div>
-          <div class="card"><div class="stat-title">Presupuestado</div><div class="stat-value">$4.820</div><div class="stat-note">Mes actual</div></div>
-        </div>
-        <div class="content-grid">
-          <div class="card">
-            <h2>Búsqueda rápida por matrícula</h2>
-            <p class="stat-note">El flujo principal del taller comienza aquí. Primero la placa, luego cliente, vehículo, ingreso y orden.</p>
-            <div class="searchbox">
-              <input class="plate" placeholder="ABC123" maxlength="8" />
-              <button class="primary" onclick="go('ingreso')">Buscar / Ingresar</button>
-            </div>
-          </div>
-          <div class="card">
-            <h2>Alertas operativas</h2>
-            <div class="list">
-              <div class="row"><div><strong>3 órdenes con más de 3 días detenidas</strong><small>Revisar compras y aprobaciones.</small></div><span class="badge yellow">Atención</span></div>
-              <div class="row"><div><strong>Inventario bajo en consumibles</strong><small>Aceite, grasa y relés por revisar.</small></div><span class="badge blue">Inventario</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="card" style="margin-top:18px">
-          <h2>Órdenes recientes</h2>
-          <div class="list">
-            <div class="row" onclick="go('ordenes')"><div><strong>AB123CD · Inversiones Los Andes, C.A.</strong><small>4 días en taller · Total estimado $420</small></div><span class="badge yellow">Esperando repuesto</span></div>
-            <div class="row" onclick="go('ordenes')"><div><strong>AE987KL · María Fernanda Rivas</strong><small>1 día en taller · Total estimado $0</small></div><span class="badge blue">En diagnóstico</span></div>
-            <div class="row" onclick="go('ordenes')"><div><strong>TQ551AA · Transporte Triana</strong><small>2 días en taller · Total estimado $780</small></div><span class="badge green">Listo para entregar</span></div>
-          </div>
-        </div>
-      </section>
-
-      <section id="ingreso" class="module-screen">
-        <div class="card">
-          <h2>Ingreso al Taller</h2>
-          <p class="stat-note">Pantalla clave del sistema: captura la hoja de ingreso y prepara la orden de trabajo.</p>
-          <div class="tabs"><span class="tab active">1. Matrícula</span><span class="tab">2. Cliente</span><span class="tab">3. Vehículo</span><span class="tab">4. Observaciones</span><span class="tab">5. Crear orden</span></div>
-          <div class="form-grid">
-            <input class="plate" placeholder="MATRÍCULA" />
-            <input placeholder="Kilometraje de ingreso" />
-            <input placeholder="Marca" />
-            <input placeholder="Modelo" />
-            <input placeholder="Año" />
-            <input placeholder="Color" />
-            <input placeholder="Serial de carrocería / NIV" />
-            <select><option>Persona jurídica / empresa</option><option>Persona natural</option></select>
-            <input placeholder="Cliente / Razón social" />
-            <input placeholder="CI / RIF" />
-          </div>
-          <textarea style="margin-top:14px" placeholder="Observaciones indicadas por el cliente: ruido, recalentamiento, falla eléctrica, mantenimiento, etc."></textarea>
-          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap"><button class="yellow">Guardar ingreso</button><button class="primary" onclick="go('ordenes')">Crear orden de trabajo</button></div>
-        </div>
-      </section>
-
-      <section id="ordenes" class="module-screen">
-        <div class="card">
-          <h2>Órdenes de Trabajo</h2>
-          <p class="stat-note">Control operativo: diagnóstico, presupuesto, aprobación, repuestos, mecánicos y reparación.</p>
-          <div class="list">
-            <div class="row"><div><strong>OT-000184 · AB123CD</strong><small>Radiador roto · Compras debe cotizar repuesto externo</small></div><span class="badge yellow">Esperando repuesto</span></div>
-            <div class="row"><div><strong>OT-000185 · AE987KL</strong><small>Ruido en tren delantero · Jefe de taller diagnosticando</small></div><span class="badge blue">En diagnóstico</span></div>
-            <div class="row"><div><strong>OT-000186 · TQ551AA</strong><small>Mantenimiento general aprobado</small></div><span class="badge green">Listo para entregar</span></div>
-          </div>
-        </div>
-      </section>
-
-      <section id="generic" class="module-screen">
-        <div class="card">
-          <h2 id="genericTitle"></h2>
-          <p id="genericDesc" class="stat-note"></p>
-        </div>
-        <div class="placeholder-grid" style="margin-top:18px">
-          <div class="placeholder"><h3>Vista principal</h3><p>Listado, filtros, estados y búsqueda rápida.</p></div>
-          <div class="placeholder"><h3>Formulario</h3><p>Registro o edición de información del módulo.</p></div>
-          <div class="placeholder"><h3>Detalle / Historial</h3><p>Consulta completa de eventos, documentos y relaciones.</p></div>
-        </div>
-      </section>
-    </main>
-  </div>
+    <section id="ingreso" class="screen ingreso"><div class="card panel"><h3>Ingreso al Taller</h3><p>Captura la hoja de ingreso y prepara la orden de trabajo.</p><div class="tabs"><span class="tab active">1. Matrícula</span><span class="tab">2. Cliente</span><span class="tab">3. Vehículo</span><span class="tab">4. Observaciones</span><span class="tab">5. Crear orden</span></div><div class="form-grid"><input class="field" placeholder="Matrícula"><input class="field" placeholder="Kilometraje"><input class="field" placeholder="Marca"><input class="field" placeholder="Modelo"><input class="field" placeholder="Año"><input class="field" placeholder="Color"><input class="field" placeholder="Serial carrocería / NIV"><input class="field" placeholder="Cliente / Empresa"><textarea class="field big" placeholder="Observaciones indicadas por el cliente"></textarea></div><br><button class="btn" onclick="go('ordenes')">Crear orden de trabajo</button></div></section>
+    <section id="ordenes" class="screen ordenes"><div class="card panel"><h3>Órdenes de Trabajo</h3><p>Control operativo: diagnóstico, presupuesto, aprobación, repuestos, mecánicos y reparación.</p><table class="table"><tr><th>Orden</th><th>Vehículo</th><th>Estado</th><th>Bloqueo</th></tr><tr><td>OT-000184</td><td>AB123CD</td><td><span class="badge b-orange">Esperando repuesto</span></td><td>Compras debe cotizar radiador</td></tr><tr><td>OT-000185</td><td>AE987KL</td><td><span class="badge b-blue">En diagnóstico</span></td><td>Jefe de taller revisando ruido</td></tr></table></div></section>
+    <section id="generic" class="screen generic"><div class="card panel"><h3 id="genericTitle"></h3><p id="genericDesc"></p></div><div class="placeholder-grid"><div class="placeholder"><h3>Vista principal</h3><p>Listado, filtros, estados y búsqueda rápida.</p></div><div class="placeholder"><h3>Formulario</h3><p>Registro o edición del módulo.</p></div><div class="placeholder"><h3>Detalle / Historial</h3><p>Consulta completa de eventos y relaciones.</p></div></div></section>
+    <footer class="footer"><span>© 2025 Trieste IA - Sistema de Gestión Taller Mecánico</span><span>Versión 1.0.0</span></footer>
+  </main>
+</div>
 <script>
-  const modules = [
-    ['dashboard','📊','Dashboard','Vista general del taller, alertas, órdenes activas y búsqueda por matrícula.'],
-    ['ingreso','🚗','Ingreso al Taller','Hoja de ingreso, datos del vehículo, cliente, kilometraje y observaciones iniciales.'],
-    ['ordenes','📋','Órdenes','Diagnóstico, aprobación, reparación, repuestos, mecánicos y estados de trabajo.'],
-    ['clientes','👥','Clientes','Personas naturales, jurídicas, empresas y flotillas.'],
-    ['vehiculos','🚘','Vehículos','Historial por matrícula, datos técnicos y relación con cliente propietario.'],
-    ['inventario','📦','Inventario','Consumibles, repuestos existentes, stock mínimo y movimientos.'],
-    ['compras','🛒','Compras','Repuestos externos solicitados para órdenes específicas.'],
-    ['presupuestos','📄','Presupuestos','Servicios, repuestos, utilidad, aprobación y documento para cliente.'],
-    ['historico','🕘','Histórico','Historia clínica del vehículo: ingresos, trabajos, costos y mecánicos.'],
-    ['tasas','💵','Tasas','Control cambiario para USD, VES y EUR.'],
-    ['config','⚙️','Configuración','Usuarios, roles, impresión, identidad visual y parámetros del taller.']
-  ];
-  const customScreens = ['dashboard','ingreso','ordenes'];
-  const nav = document.getElementById('nav');
-  modules.forEach(m => {
-    const b = document.createElement('button');
-    b.className = 'nav-btn' + (m[0] === 'dashboard' ? ' active' : '');
-    b.innerHTML = `<span>${m[1]}</span>${m[2]}`;
-    b.onclick = () => go(m[0]);
-    b.dataset.page = m[0];
-    nav.appendChild(b);
-  });
-  function go(page){
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.page === page));
-    const data = modules.find(m => m[0] === page);
-    document.getElementById('pageTitle').textContent = data[2];
-    document.querySelectorAll('.module-screen').forEach(s => s.classList.remove('active'));
-    if(customScreens.includes(page)) document.getElementById(page).classList.add('active');
-    else {
-      document.getElementById('generic').classList.add('active');
-      document.getElementById('genericTitle').textContent = data[2];
-      document.getElementById('genericDesc').textContent = data[3];
-    }
-  }
-  function toggleTheme(){
-    document.body.classList.toggle('dark');
-    const dark = document.body.classList.contains('dark');
-    document.getElementById('themeBtn').textContent = dark ? '☀️ Modo claro' : '🌙 Modo oscuro';
-  }
+const groups=[['OPERACIONES',[['dashboard','⌂','Dashboard'],['ingreso','▣','Ingreso al Taller'],['ordenes','▤','Órdenes de Trabajo'],['presupuestos','▤','Presupuestos'],['facturacion','▤','Facturación'],['clientes','♧','Clientes'],['vehiculos','▱','Vehículos']]],['INVENTARIO',[['repuestos','⚙','Repuestos'],['servicios','⊗','Servicios']]],['GESTIÓN',[['mecanicos','♙','Mecánicos'],['tasas','⊕','Tasa de Cambio']]],['IA Y HERRAMIENTAS',[['ia','♬','Análisis IA','soon'],['extractor','▧','Extractor por Texto','soon']]],['REPORTES',[['reportes','▧','Reportes'],['estadisticas','⌁','Estadísticas']]],['CONFIGURACIÓN',[['usuarios','♧','Usuarios'],['config','⚙','Configuración']]]];
+const desc={presupuestos:'Servicios, repuestos, utilidad, aprobación y documento para cliente.',facturacion:'Nota de entrega y resumen para facturación externa.',clientes:'Personas naturales, jurídicas, empresas y flotillas.',vehiculos:'Historial por matrícula y datos técnicos.',repuestos:'Inventario, consumibles y repuestos críticos.',servicios:'Catálogo de mano de obra y servicios.',mecanicos:'Personal técnico, asignaciones y comisiones.',tasas:'Control cambiario USD, VES y EUR.',ia:'Funciones IA futuras deshabilitadas.',extractor:'Extractor de texto futuro.',reportes:'Reportes operativos del taller.',estadisticas:'Indicadores de desempeño.',usuarios:'Roles y permisos.',config:'Parámetros del sistema.'};
+const nav=document.getElementById('nav');groups.forEach(g=>{let title=document.createElement('div');title.className='group';title.textContent=g[0];nav.appendChild(title);g[1].forEach(m=>{let b=document.createElement('button');b.dataset.page=m[0];b.className=m[0]=='dashboard'?'active':'';b.innerHTML=`<span>${m[1]}</span>${m[2]}${m[3]?'<span class="soon">PRÓXIMAMENTE</span>':''}`;b.onclick=()=>go(m[0]);nav.appendChild(b)})});
+function go(page){document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));let titles={dashboard:'Bienvenido al Sistema 👋',ingreso:'Ingreso al Taller',ordenes:'Órdenes de Trabajo'};document.getElementById('pageTitle').textContent=titles[page]||document.querySelector(`[data-page="${page}"]`)?.innerText.replace('PRÓXIMAMENTE','')||'Módulo';if(['dashboard','ingreso','ordenes'].includes(page))document.getElementById(page).classList.add('active');else{document.getElementById('generic').classList.add('active');document.getElementById('genericTitle').textContent=document.getElementById('pageTitle').textContent;document.getElementById('genericDesc').textContent=desc[page]||'Módulo pendiente de diseño detallado.'}}
 </script>
 </body>
 </html>
