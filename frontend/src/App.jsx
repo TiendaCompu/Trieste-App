@@ -4,6 +4,7 @@ import Topbar from './components/Topbar.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import IngresoVehiculo from './pages/IngresoVehiculo.jsx';
 import OrdenesTrabajo from './pages/OrdenesTrabajo.jsx';
+import Presupuestos from './pages/Presupuestos.jsx';
 import { modules } from './data/modules.js';
 
 export default function App() {
@@ -19,6 +20,9 @@ export default function App() {
 
       case 'Órdenes de Trabajo':
         return <OrdenesTrabajo />;
+
+      case 'Presupuestos':
+        return <Presupuestos />;
 
       default:
         return (
