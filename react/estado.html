@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZYTRONIX - Estado de Orden</title>
+  <style>
+    :root{--border:rgba(255,255,255,.1);--muted:#94a3b8;--blue:#0068ff;--green:#22c55e;--orange:#f59e0b;--red:#ef4444;--purple:#a855f7}*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top left,rgba(0,104,255,.18),transparent 28%),linear-gradient(180deg,#050b14,#07111d);color:white}.wrap{max-width:1220px;margin:auto;padding:28px}.top{display:flex;justify-content:space-between;gap:18px;align-items:center;margin-bottom:24px}.brand h1{margin:0;font-size:32px;letter-spacing:2px}.brand p{margin:6px 0 0;color:#cbd5e1}.back{color:white;text-decoration:none;border:1px solid var(--border);border-radius:12px;padding:12px 16px;background:rgba(255,255,255,.04)}.panel{background:linear-gradient(145deg,rgba(17,36,57,.92),rgba(8,21,35,.95));border:1px solid var(--border);border-radius:20px;padding:24px;box-shadow:0 25px 80px rgba(0,0,0,.35);margin-bottom:18px}.hero{display:grid;grid-template-columns:1.5fr .8fr;gap:18px;align-items:stretch}.hero h2{margin:0;font-size:30px}.hero p,.panel p{color:var(--muted);line-height:1.55}.status-card{text-align:center;display:grid;place-items:center;border-radius:18px;border:1px solid var(--border);background:rgba(255,255,255,.04);padding:22px}.status-badge{display:inline-flex;padding:12px 18px;border-radius:999px;font-weight:950;font-size:16px}.diagnostico{background:rgba(245,158,11,.18);color:#fcd34d}.aprobado{background:rgba(0,104,255,.22);color:#93c5fd}.reparacion{background:rgba(168,85,247,.22);color:#e9d5ff}.listo{background:rgba(34,197,94,.2);color:#86efac}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}.step{border:1px solid var(--border);background:rgba(255,255,255,.04);border-radius:16px;padding:16px}.step span{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.08);font-weight:950;margin-bottom:12px}.step.active{border-color:rgba(0,104,255,.55);box-shadow:0 0 28px rgba(0,104,255,.18)}.step.done span{background:linear-gradient(135deg,#22c55e,#15803d)}.step.current span{background:linear-gradient(135deg,#0877ff,#004ee8)}.step h3{margin:0 0 8px}.step small{color:#cbd5e1}.actions{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.btn{border:0;border-radius:14px;color:white;padding:15px;font-weight:950;cursor:pointer;background:rgba(255,255,255,.055);border:1px solid var(--border)}.btn.blue{background:linear-gradient(135deg,#0877ff,#004ee8);border:0}.btn.green{background:linear-gradient(135deg,#22c55e,#15803d);border:0}.btn.orange{background:linear-gradient(135deg,#f59e0b,#c2410c);border:0}.btn.purple{background:linear-gradient(135deg,#a855f7,#6d28d9);border:0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.log{display:grid;gap:10px}.log-row{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:12px;border-bottom:1px solid var(--border)}.log-row b{color:#cbd5e1}.log-row span{color:var(--muted)}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.box{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;padding:14px}.box span{display:block;color:var(--muted);font-size:12px;margin-bottom:8px}.box strong{font-size:18px}.footer{text-align:center;color:#8fa0b7;font-size:13px;margin-top:24px}@media(max-width:900px){.hero,.steps,.actions,.grid,.summary{grid-template-columns:1fr}.top{flex-direction:column;align-items:flex-start}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand"><h1>ZYTRONIX</h1><p>Sistema Electrónico Automatizado · Control de estados</p></div>
+    <a class="back" href="./flujo.html">← Volver al flujo</a>
+  </div>
+
+  <section class="panel hero">
+    <div>
+      <h2>Orden OT-2026-001</h2>
+      <p>Simulación interactiva del estado operativo de una orden de trabajo. Esta pantalla demuestra cómo el taller puede controlar el avance real del vehículo.</p>
+      <div class="summary">
+        <div class="box"><span>Matrícula</span><strong>ABC-123</strong></div>
+        <div class="box"><span>Vehículo</span><strong>Toyota Corolla</strong></div>
+        <div class="box"><span>Mecánico</span><strong>Carlos Mendoza</strong></div>
+        <div class="box"><span>Total</span><strong>$349</strong></div>
+      </div>
+    </div>
+    <div class="status-card">
+      <div>
+        <p>Estado actual</p>
+        <div id="badge" class="status-badge diagnostico">En diagnóstico</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h3>Avance de la orden</h3>
+    <p>Haz clic en las acciones para cambiar el estado visual.</p>
+    <div class="steps" id="steps"></div>
+  </section>
+
+  <section class="panel">
+    <h3>Acciones rápidas</h3>
+    <div class="actions">
+      <button class="btn orange" onclick="setState(0)">Diagnóstico</button>
+      <button class="btn blue" onclick="setState(1)">Aprobada</button>
+      <button class="btn purple" onclick="setState(2)">En reparación</button>
+      <button class="btn green" onclick="setState(3)">Lista para entrega</button>
+    </div>
+  </section>
+
+  <div class="grid">
+    <section class="panel">
+      <h3>Bitácora de cambios</h3>
+      <div class="log" id="log"></div>
+    </section>
+    <section class="panel">
+      <h3>Siguiente acción recomendada</h3>
+      <p id="nextAction">Completar diagnóstico y enviar presupuesto al cliente.</p>
+      <a class="back" href="./orden.html">Abrir vista completa de orden</a>
+    </section>
+  </div>
+
+  <div class="footer">© 2026 ZYTRONIX Platform · Diseño del sistema: Christian Lahesa</div>
+</div>
+<script>
+const states=[
+  {name:'En diagnóstico',cls:'diagnostico',next:'Completar diagnóstico y enviar presupuesto al cliente.',steps:['Ingreso','Diagnóstico','Presupuesto','Entrega'],log:'Diagnóstico iniciado'},
+  {name:'Presupuesto aprobado',cls:'aprobado',next:'Solicitar repuestos y asignar mecánico responsable.',steps:['Ingreso','Diagnóstico','Aprobación','Entrega'],log:'Cliente aprobó el presupuesto'},
+  {name:'En reparación',cls:'reparacion',next:'Registrar repuestos usados y avance del mecánico.',steps:['Ingreso','Aprobación','Reparación','Entrega'],log:'Reparación iniciada'},
+  {name:'Lista para entrega',cls:'listo',next:'Generar nota de entrega y cerrar la orden.',steps:['Ingreso','Reparación','Prueba final','Entrega'],log:'Vehículo listo para entrega'}
+];
+let current=0;let logs=[];
+function render(){
+ const s=states[current];
+ const badge=document.getElementById('badge');
+ badge.className='status-badge '+s.cls; badge.textContent=s.name;
+ document.getElementById('nextAction').textContent=s.next;
+ document.getElementById('steps').innerHTML=s.steps.map((x,i)=>`<div class="step ${i<current?'done':''} ${i===current?'current active':''}"><span>${i<current?'✓':i+1}</span><h3>${x}</h3><small>${i===current?'Estado actual':'Paso operativo'}</small></div>`).join('');
+ document.getElementById('log').innerHTML=logs.map(l=>`<div class="log-row"><b>${l.time}</b><span>${l.text}</span></div>`).join('') || '<p>No hay cambios registrados.</p>';
+}
+function setState(i){current=i;logs.unshift({time:new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}),text:states[i].log});render();}
+render();
+</script>
+</body>
+</html>
