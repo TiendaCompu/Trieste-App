@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZYTRONIX - Orden Operativa</title>
+  <style>
+    :root{--bg:#06101b;--panel:#0c1b2a;--panel2:#102236;--border:rgba(255,255,255,.1);--muted:#94a3b8;--blue:#0068ff;--green:#22c55e;--orange:#f59e0b;--red:#ef4444;--purple:#a855f7}*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top left,rgba(0,104,255,.16),transparent 28%),linear-gradient(180deg,#050b14,#07111d);color:white}.wrap{max-width:1320px;margin:auto;padding:28px}.top{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:22px}.brand h1{margin:0;font-size:32px;letter-spacing:2px}.brand p{margin:6px 0 0;color:#cbd5e1}.back{color:white;text-decoration:none;border:1px solid var(--border);border-radius:12px;padding:12px 16px;background:rgba(255,255,255,.04)}.hero{background:linear-gradient(145deg,rgba(17,36,57,.92),rgba(8,21,35,.95));border:1px solid var(--border);border-radius:20px;padding:24px;box-shadow:0 25px 80px rgba(0,0,0,.35);margin-bottom:18px}.hero-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start}.hero h2{margin:0;font-size:30px}.hero p{color:var(--muted);margin:8px 0 0}.status{display:inline-flex;border-radius:999px;padding:9px 14px;font-size:13px;font-weight:900;background:rgba(245,158,11,.18);color:#fcd34d}.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:20px}.card,.panel{background:linear-gradient(145deg,rgba(17,36,57,.88),rgba(8,21,35,.93));border:1px solid var(--border);border-radius:16px;padding:18px;box-shadow:0 18px 60px rgba(0,0,0,.25)}.card span{display:block;color:var(--muted);font-size:12px;margin-bottom:8px}.card strong{font-size:18px}.panel h3{margin:0 0 8px;font-size:20px}.panel p{color:var(--muted);margin:0 0 14px}.table{width:100%;border-collapse:collapse}.table th{text-align:left;color:#8fa0b7;font-size:13px;padding:12px 8px;border-bottom:1px solid var(--border)}.table td{padding:13px 8px;border-bottom:1px solid var(--border);font-size:14px}.pill{display:inline-flex;border-radius:8px;background:rgba(0,104,255,.22);color:#60a5fa;padding:6px 9px;font-size:12px;font-weight:900}.timeline{display:grid;gap:12px}.step{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start}.dot{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:rgba(0,104,255,.2);color:#93c5fd;font-weight:900}.step.done .dot{background:rgba(34,197,94,.2);color:#86efac}.step.warn .dot{background:rgba(245,158,11,.2);color:#fcd34d}.step b{display:block}.step small{color:var(--muted)}.actions{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.btn{border:0;border-radius:12px;color:white;padding:13px 16px;font-weight:900;cursor:pointer;background:rgba(255,255,255,.055);border:1px solid var(--border)}.btn.primary{background:linear-gradient(135deg,#0877ff,#004ee8);border:0;box-shadow:0 15px 35px rgba(0,104,255,.3)}.btn.green{background:linear-gradient(135deg,#22c55e,#15803d);border:0}.btn.orange{background:linear-gradient(135deg,#f59e0b,#c2410c);border:0}.notes{min-height:140px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--border);padding:14px;color:#cbd5e1;line-height:1.55}.footer{margin-top:22px;color:#8fa0b7;font-size:13px;text-align:center}@media(max-width:1000px){.grid,.cards,.actions{grid-template-columns:1fr}.hero-head,.top{flex-direction:column;align-items:flex-start}.table{min-width:720px}.scroll{overflow:auto}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <h1>ZYTRONIX</h1>
+        <p>Sistema Electrónico Automatizado · Orden Operativa</p>
+      </div>
+      <a class="back" href="./?v=4">← Volver al Dashboard</a>
+    </div>
+
+    <section class="hero">
+      <div class="hero-head">
+        <div>
+          <h2>Orden de Trabajo OT-2026-001</h2>
+          <p>Control completo del diagnóstico, presupuesto, repuestos, mecánicos y entrega.</p>
+        </div>
+        <span class="status">En diagnóstico</span>
+      </div>
+
+      <div class="cards">
+        <div class="card"><span>Matrícula</span><strong>ABC-123</strong></div>
+        <div class="card"><span>Vehículo</span><strong>Toyota Corolla 2020</strong></div>
+        <div class="card"><span>Cliente</span><strong>Centro de Servicio Automotriz Trieste</strong></div>
+        <div class="card"><span>Total estimado</span><strong>$349</strong></div>
+      </div>
+    </section>
+
+    <div class="grid">
+      <div>
+        <section class="panel">
+          <h3>Diagnóstico y Observaciones</h3>
+          <p>Motivo de ingreso indicado por el cliente y revisión técnica inicial.</p>
+          <div class="notes">
+            Cliente reporta recalentamiento en tráfico pesado y pérdida leve de refrigerante. Se detecta fuga en radiador principal, refrigerante contaminado y presión irregular en el sistema. Se recomienda cambio de radiador, limpieza de sistema, refrigerante nuevo y prueba de presión final.
+          </div>
+        </section>
+
+        <section class="panel">
+          <h3>Repuestos y Mano de Obra</h3>
+          <p>Elementos asociados directamente a esta orden.</p>
+          <div class="scroll">
+            <table class="table">
+              <thead><tr><th>Tipo</th><th>Descripción</th><th>Cant.</th><th>Costo</th><th>Utilidad</th><th>Total</th></tr></thead>
+              <tbody>
+                <tr><td><span class="pill">Servicio</span></td><td>Diagnóstico general</td><td>1</td><td>$25</td><td>0%</td><td>$25</td></tr>
+                <tr><td><span class="pill">Repuesto</span></td><td>Radiador principal</td><td>1</td><td>$180</td><td>30%</td><td>$234</td></tr>
+                <tr><td><span class="pill">Mano de obra</span></td><td>Instalación y prueba</td><td>1</td><td>$60</td><td>0%</td><td>$60</td></tr>
+                <tr><td><span class="pill">Consumible</span></td><td>Refrigerante</td><td>2</td><td>$12</td><td>25%</td><td>$30</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <div>
+        <section class="panel">
+          <h3>Timeline Técnico</h3>
+          <p>Seguimiento operativo de la orden.</p>
+          <div class="timeline">
+            <div class="step done"><div class="dot">✓</div><div><b>Vehículo ingresado</b><small>Hoy 08:12 AM · Recepción</small></div></div>
+            <div class="step done"><div class="dot">✓</div><div><b>Inspección inicial</b><small>Hoy 08:45 AM · Jefe de taller</small></div></div>
+            <div class="step warn"><div class="dot">!</div><div><b>Diagnóstico en curso</b><small>Esperando confirmación de repuesto</small></div></div>
+            <div class="step"><div class="dot">4</div><div><b>Presupuesto al cliente</b><small>Pendiente por enviar</small></div></div>
+            <div class="step"><div class="dot">5</div><div><b>Reparación / entrega</b><small>Pendiente</small></div></div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h3>Acciones de Orden</h3>
+          <p>Controles rápidos para demo operativa.</p>
+          <div class="actions">
+            <button class="btn primary">Generar Presupuesto</button>
+            <button class="btn green">Marcar Aprobada</button>
+            <button class="btn orange">Solicitar Repuesto</button>
+            <button class="btn">Imprimir Nota</button>
+            <button class="btn">Enviar por WhatsApp</button>
+            <button class="btn">Cerrar Orden</button>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div class="footer">© 2026 ZYTRONIX Platform · Diseño del sistema: Christian Lahesa</div>
+  </div>
+</body>
+</html>
