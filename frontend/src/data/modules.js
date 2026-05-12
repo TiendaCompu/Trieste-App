@@ -1,21 +1,21 @@
 export const modules = [
-  'Dashboard',
-  'Ingreso al Taller',
-  'Órdenes de Trabajo',
-  'Presupuestos',
-  'Historial Vehículo',
-  'Clientes',
-  'Vehículos',
-  'Inventario',
-  'Mecánicos',
-  'Configuración'
+  { name: 'Dashboard', icon: '⌂' },
+  { name: 'Ingreso al Taller', icon: '🚘' },
+  { name: 'Órdenes de Trabajo', icon: '▤' },
+  { name: 'Presupuestos', icon: '◈' },
+  { name: 'Historial Vehículo', icon: '◷' },
+  { name: 'Clientes', icon: '♧' },
+  { name: 'Vehículos', icon: '▱' },
+  { name: 'Inventario', icon: '▦' },
+  { name: 'Mecánicos', icon: '⚙' },
+  { name: 'Configuración', icon: '◉' }
 ];
 
 export const stats = [
-  { title: 'Órdenes Activas', value: '15', note: 'Vehículos en proceso' },
-  { title: 'Ingresos Hoy', value: '8', note: 'Nuevos vehículos' },
-  { title: 'Por Entregar', value: '5', note: 'Listos para cliente' },
-  { title: 'Estimado Diario', value: '$2,450', note: 'Monto operativo' }
+  { title: 'Órdenes Activas', value: '15', note: 'Vehículos en proceso', icon: '🔧' },
+  { title: 'Ingresos Hoy', value: '8', note: 'Nuevos vehículos', icon: '🚗' },
+  { title: 'Por Entregar', value: '5', note: 'Listos para cliente', icon: '✅' },
+  { title: 'Estimado Diario', value: '$2,450', note: 'Monto operativo', icon: '$' }
 ];
 
 export const recentOrders = [
