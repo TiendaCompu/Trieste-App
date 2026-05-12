@@ -6,6 +6,7 @@ import IngresoVehiculo from './pages/IngresoVehiculo.jsx';
 import OrdenesTrabajo from './pages/OrdenesTrabajo.jsx';
 import Presupuestos from './pages/Presupuestos.jsx';
 import HistorialVehiculo from './pages/HistorialVehiculo.jsx';
+import Inventario from './pages/Inventario.jsx';
 import { modules } from './data/modules.js';
 
 export default function App() {
@@ -27,6 +28,9 @@ export default function App() {
 
       case 'Historial Vehículo':
         return <HistorialVehiculo />;
+
+      case 'Inventario':
+        return <Inventario />;
 
       default:
         return (
