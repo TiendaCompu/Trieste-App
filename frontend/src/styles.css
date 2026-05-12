@@ -1,0 +1,131 @@
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  background: #07111d;
+  color: white;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  background: #081522;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  padding: 20px;
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 30px;
+  letter-spacing: 2px;
+}
+
+.brand p {
+  margin: 6px 0;
+  color: #cbd5e1;
+}
+
+.brand small {
+  color: #94a3b8;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+nav button {
+  height: 44px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: white;
+  text-align: left;
+  padding: 0 14px;
+  cursor: pointer;
+}
+
+nav button.active {
+  background: linear-gradient(135deg,#0068ff,#0046c7);
+}
+
+.content {
+  padding: 24px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topbar h2 {
+  margin: 0;
+}
+
+.topbar p {
+  color: #94a3b8;
+}
+
+.userbox {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg,#e2e8f0,#64748b);
+}
+
+.badge {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ef4444;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.card {
+  background: #0c1b2a;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.card h3 {
+  margin-top: 0;
+  color: #cbd5e1;
+}
+
+.card strong {
+  font-size: 34px;
+}
+
+.panel {
+  margin-top: 24px;
+  background: #0c1b2a;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 24px;
+}
