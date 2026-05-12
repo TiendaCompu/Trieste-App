@@ -7,6 +7,7 @@ import OrdenesTrabajo from './pages/OrdenesTrabajo.jsx';
 import Presupuestos from './pages/Presupuestos.jsx';
 import HistorialVehiculo from './pages/HistorialVehiculo.jsx';
 import Inventario from './pages/Inventario.jsx';
+import Configuracion from './pages/Configuracion.jsx';
 import { modules } from './data/modules.js';
 
 export default function App() {
@@ -31,6 +32,9 @@ export default function App() {
 
       case 'Inventario':
         return <Inventario />;
+
+      case 'Configuración':
+        return <Configuracion />;
 
       default:
         return (
