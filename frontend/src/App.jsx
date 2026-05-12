@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard.jsx';
 import IngresoVehiculo from './pages/IngresoVehiculo.jsx';
 import OrdenesTrabajo from './pages/OrdenesTrabajo.jsx';
 import Presupuestos from './pages/Presupuestos.jsx';
+import HistorialVehiculo from './pages/HistorialVehiculo.jsx';
 import { modules } from './data/modules.js';
 
 export default function App() {
@@ -23,6 +24,9 @@ export default function App() {
 
       case 'Presupuestos':
         return <Presupuestos />;
+
+      case 'Historial Vehículo':
+        return <HistorialVehiculo />;
 
       default:
         return (
