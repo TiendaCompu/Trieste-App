@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZYTRONIX - Flujo Operativo</title>
+  <style>
+    :root{--bg:#07111d;--panel:#0c1b2a;--border:rgba(255,255,255,.1);--muted:#94a3b8;--blue:#0068ff;--green:#22c55e;--orange:#f59e0b;--red:#ef4444}*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top left,rgba(0,104,255,.18),transparent 28%),linear-gradient(180deg,#050b14,#07111d);color:white}.wrap{max-width:1300px;margin:auto;padding:28px}.top{display:flex;justify-content:space-between;gap:18px;align-items:center;margin-bottom:24px}.brand h1{margin:0;font-size:32px;letter-spacing:2px}.brand p{margin:6px 0 0;color:#cbd5e1}.back{color:white;text-decoration:none;border:1px solid var(--border);border-radius:12px;padding:12px 16px;background:rgba(255,255,255,.04)}.hero,.panel{background:linear-gradient(145deg,rgba(17,36,57,.92),rgba(8,21,35,.95));border:1px solid var(--border);border-radius:20px;padding:24px;box-shadow:0 25px 80px rgba(0,0,0,.35);margin-bottom:18px}.hero h2{margin:0;font-size:30px}.hero p,.panel p{color:var(--muted);line-height:1.55}.flow{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:22px}.step{position:relative;border:1px solid var(--border);border-radius:18px;padding:18px;background:rgba(255,255,255,.04);min-height:170px}.num{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#0877ff,#004ee8);font-weight:950;margin-bottom:14px}.step h3{margin:0 0 8px;font-size:17px}.step small{color:#cbd5e1}.done .num{background:linear-gradient(135deg,#22c55e,#15803d)}.warn .num{background:linear-gradient(135deg,#f59e0b,#c2410c)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.btn{display:block;text-align:center;text-decoration:none;color:white;border-radius:14px;padding:16px;border:1px solid var(--border);background:rgba(255,255,255,.045);font-weight:900}.btn.primary{background:linear-gradient(135deg,#0877ff,#004ee8);border:0}.btn.green{background:linear-gradient(135deg,#22c55e,#15803d);border:0}.btn.orange{background:linear-gradient(135deg,#f59e0b,#c2410c);border:0}.table{width:100%;border-collapse:collapse}.table th{text-align:left;color:#8fa0b7;font-size:13px;padding:12px 8px;border-bottom:1px solid var(--border)}.table td{padding:14px 8px;border-bottom:1px solid var(--border)}.pill{display:inline-flex;border-radius:8px;background:rgba(0,104,255,.22);color:#60a5fa;padding:6px 9px;font-size:12px;font-weight:900}.footer{text-align:center;color:#8fa0b7;font-size:13px;margin-top:24px}@media(max-width:1000px){.flow,.grid,.actions{grid-template-columns:1fr}.top{flex-direction:column;align-items:flex-start}.table{min-width:760px}.scroll{overflow:auto}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand"><h1>ZYTRONIX</h1><p>Sistema Electrónico Automatizado · Flujo operativo de taller</p></div>
+    <a class="back" href="./?v=4">← Volver al Dashboard</a>
+  </div>
+
+  <section class="hero">
+    <h2>Flujo operativo completo</h2>
+    <p>Esta vista resume cómo ZYTRONIX convierte el ingreso de un vehículo en una orden controlada, presupuesto, aprobación, reparación y entrega.</p>
+    <div class="flow">
+      <div class="step done"><div class="num">1</div><h3>Ingreso</h3><small>Matrícula, cliente, vehículo y observaciones iniciales.</small></div>
+      <div class="step done"><div class="num">2</div><h3>Diagnóstico</h3><small>Revisión técnica y veredicto del jefe de taller.</small></div>
+      <div class="step warn"><div class="num">3</div><h3>Presupuesto</h3><small>Servicios, repuestos, utilidad y total al cliente.</small></div>
+      <div class="step"><div class="num">4</div><h3>Aprobación</h3><small>Cliente autoriza reparación y compras.</small></div>
+      <div class="step"><div class="num">5</div><h3>Reparación</h3><small>Mecánicos, repuestos y seguimiento técnico.</small></div>
+      <div class="step"><div class="num">6</div><h3>Entrega</h3><small>Nota de entrega, historial y cierre de orden.</small></div>
+    </div>
+  </section>
+
+  <div class="grid">
+    <section class="panel">
+      <h3>Orden activa vinculada</h3>
+      <p>La orden OT-2026-001 está actualmente en diagnóstico y lista para generar presupuesto.</p>
+      <div class="scroll"><table class="table">
+        <thead><tr><th>Orden</th><th>Matrícula</th><th>Vehículo</th><th>Estado</th><th>Total</th></tr></thead>
+        <tbody><tr><td>OT-2026-001</td><td>ABC-123</td><td>Toyota Corolla 2020</td><td><span class="pill">En diagnóstico</span></td><td>$349</td></tr></tbody>
+      </table></div>
+    </section>
+
+    <section class="panel">
+      <h3>Acciones de demo</h3>
+      <p>Usa estos accesos para mostrar el recorrido del sistema al cliente.</p>
+      <div class="actions">
+        <a class="btn primary" href="./orden.html">Abrir Orden</a>
+        <a class="btn green" href="./?v=4">Dashboard</a>
+        <a class="btn orange" href="./?v=4">Presupuesto</a>
+      </div>
+    </section>
+  </div>
+
+  <section class="panel">
+    <h3>Qué demuestra esta pantalla</h3>
+    <p>Que ZYTRONIX no es solo una pantalla bonita: es un proceso operativo pensado para controlar el taller desde la recepción hasta la entrega, dejando trazabilidad histórica para cada matrícula.</p>
+  </section>
+
+  <div class="footer">© 2026 ZYTRONIX Platform · Diseño del sistema: Christian Lahesa</div>
+</div>
+</body>
+</html>
