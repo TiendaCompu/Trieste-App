@@ -3,6 +3,7 @@ export const modules = [
   'Ingreso al Taller',
   'Órdenes de Trabajo',
   'Presupuestos',
+  'Historial Vehículo',
   'Clientes',
   'Vehículos',
   'Inventario',
